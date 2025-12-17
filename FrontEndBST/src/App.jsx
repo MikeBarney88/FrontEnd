@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+} from "react-router-dom";
 import CreateTree from "./components/CreateTree";
 import TreeHistory from "./components/TreeHistory";
 import "./App.css";
@@ -8,17 +13,17 @@ function App() {
     <Router>
       <div className="app">
         <header className="header">
-          <h1>🌳 Binary Search Tree Visualizer</h1>
+          <h1>Binary Search Tree Visualizer</h1>
           <p>Create and visualize binary search trees</p>
         </header>
 
         <nav className="nav">
-          <Link to="/" className="nav-link">
+          <NavLink to="/" className="nav-link">
             Create Tree
-          </Link>
-          <Link to="/history" className="nav-link">
+          </NavLink>
+          <NavLink to="/history" className="nav-link">
             View History
-          </Link>
+          </NavLink>
         </nav>
 
         <main className="main-content">
@@ -29,7 +34,7 @@ function App() {
         </main>
 
         <footer className="footer">
-          <p>&copy; 2024 BST Visualizer | Keyin College Sprint Project</p>
+          <p>&copy; 2025 BST Visualizer | Michael Barney</p>
         </footer>
       </div>
     </Router>

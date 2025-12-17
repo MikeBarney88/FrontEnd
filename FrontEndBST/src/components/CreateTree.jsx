@@ -11,7 +11,6 @@ function CreateTree() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
     setError("");
     setTreeData(null);
@@ -49,7 +48,6 @@ function CreateTree() {
               placeholder="e.g., 50, 30, 70, 20, 40, 60, 80"
               required
             />
-            <small>Enter integers separated by commas</small>
           </div>
 
           <div className="form-group">
@@ -59,7 +57,7 @@ function CreateTree() {
                 checked={balanced}
                 onChange={(e) => setBalanced(e.target.checked)}
               />
-              Create a balanced tree (BONUS feature)
+              Create a balanced tree
             </label>
           </div>
 
@@ -72,16 +70,7 @@ function CreateTree() {
 
         {treeData && (
           <div className="tree-result">
-            <h3>Your Tree</h3>
-            <div className="tree-info">
-              <div>
-                <strong>Input Numbers:</strong> {treeData.inputNumbers}
-              </div>
-              <div>
-                <strong>Tree ID:</strong> {treeData.id}
-              </div>
-            </div>
-            <h4>Tree Structure (JSON)</h4>
+            <h3>Tree Structure</h3>
             <pre className="tree-json">
               {JSON.stringify(JSON.parse(treeData.treeStructure), null, 2)}
             </pre>

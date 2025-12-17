@@ -18,14 +18,11 @@ function TreeHistory() {
 
     try {
       const response = await treeApi.getAllTrees();
-
       if (response.success) {
         setTrees(response.data);
-      } else {
-        setError("Failed to load trees");
       }
     } catch (err) {
-      setError(err.message || "Error connecting to server");
+      setError(err.message || "Error loading trees");
     } finally {
       setLoading(false);
     }
@@ -51,7 +48,6 @@ function TreeHistory() {
   if (loading) {
     return (
       <div className="loading">
-        <div className="spinner"></div>
         <p>Loading trees...</p>
       </div>
     );
@@ -75,53 +71,55 @@ function TreeHistory() {
             <p>Create your first binary search tree to see it here.</p>
           </div>
         ) : (
-          <div className="trees-list">
+          <>
             <p className="tree-count">Total trees: {trees.length}</p>
 
-            {trees.map((tree) => (
-              <div key={tree.id} className="tree-card">
-                <div className="tree-card-header">
-                  <h3>Tree #{tree.id}</h3>
-                  <span className="tree-date">
-                    {new Date(tree.createdAt).toLocaleString()}
-                  </span>
-                </div>
-
-                <div className="tree-card-body">
-                  <div className="tree-detail">
-                    <strong>Input:</strong> {tree.inputNumbers}
+            <div className="trees-list">
+              {trees.map((tree) => (
+                <div key={tree.id} className="tree-card">
+                  <div className="tree-card-header">
+                    <h3>Tree #{tree.id}</h3>
+                    <span className="tree-date">
+                      {new Date(tree.createdAt).toLocaleString()}
+                    </span>
                   </div>
 
-                  <div className="button-group">
-                    <button
-                      onClick={() => toggleExpand(tree.id)}
-                      className="btn-small btn-info"
-                    >
-                      {expandedTree === tree.id ? "Hide" : "Show"} Structure
-                    </button>
-                    <button
-                      onClick={() => handleDelete(tree.id)}
-                      className="btn-small btn-danger"
-                    >
-                      Delete
-                    </button>
-                  </div>
-
-                  {expandedTree === tree.id && (
-                    <div className="tree-structure">
-                      <pre>
-                        {JSON.stringify(
-                          JSON.parse(tree.treeStructure),
-                          null,
-                          2
-                        )}
-                      </pre>
+                  <div className="tree-card-body">
+                    <div className="tree-detail">
+                      <strong>Input:</strong> {tree.inputNumbers}
                     </div>
-                  )}
+
+                    <div className="button-group">
+                      <button
+                        onClick={() => toggleExpand(tree.id)}
+                        className="btn-small btn-info"
+                      >
+                        {expandedTree === tree.id ? "Hide" : "Show"} Structure
+                      </button>
+                      <button
+                        onClick={() => handleDelete(tree.id)}
+                        className="btn-small btn-danger"
+                      >
+                        Delete
+                      </button>
+                    </div>
+
+                    {expandedTree === tree.id && (
+                      <div className="tree-structure">
+                        <pre>
+                          {JSON.stringify(
+                            JSON.parse(tree.treeStructure),
+                            null,
+                            2
+                          )}
+                        </pre>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </>
         )}
       </div>
     </div>
